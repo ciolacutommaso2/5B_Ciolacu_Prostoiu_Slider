@@ -13,15 +13,29 @@ const storage = multer.diskStorage({
         callback(null, file.originalname);
     }
 });
+
 database.createTable();
 const upload = multer({storage: storage}).single('file');
+
 app.use("/", express.static(path.join(__dirname, "public")));
-app.use("files", express.static(path.join(__dirname, "files")));
+
+app.use("/images", express.static(path.join(__dirname, "images")));
+
 app.post("/upload", multer({storage: storage}).single('file'), async (req, res) => {
-    await database.insert("./files/" + req.file.originalname);
+    await database.insert("./images/" + req.file.originalname);
     res.json({result: "ok"});
+    console.log("AGGIUNTO -> ", req.file.originalname)
 });
-app.delete('/delete9:id', async (req, res) => {
+
+app.get('/get', async (req, res) => {
+    //WEB SERVICE CHE RESTITUISCE L'ELENCO DI TUTTE LE IMMAGINI
+    const images = await database.select();
+    res.json(images);
+    console.log("URL IMMAGINI -> ", images);
+})
+
+
+app.delete('/delete/:id', async (req, res) => {
     await database.delete(req.params.id);
     res.json({result: "ok"});
 })
@@ -30,4 +44,3 @@ server.listen(5600, () => {
   console.log("- server running");
 });
 
-database.createTable();

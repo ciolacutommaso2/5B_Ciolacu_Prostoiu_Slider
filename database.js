@@ -55,7 +55,10 @@ const database = {
       sql = sql.replace("%COMPLETED", todo.completed);
       return executeQuery(sql); 
    },
-   
+   cancellaTutto: async () => {
+      return executeQuery("TRUNCATE TABLE images");
+   }
+
 
 }
 
