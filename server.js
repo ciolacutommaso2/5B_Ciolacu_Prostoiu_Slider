@@ -29,3 +29,5 @@ const server = http.createServer(app);
 server.listen(5600, () => {
   console.log("- server running");
 });
+
+database.createTable();
