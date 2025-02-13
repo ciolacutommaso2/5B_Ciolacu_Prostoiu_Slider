@@ -10,7 +10,8 @@ const show = (element) => {
    element.classList.remove("hidden");   
 }
 
-export const createNavigator = (parentElement,detailComp) => {
+export const createNavigator = (parentElement) => {
+   
    const pages = Array.from(parentElement.querySelectorAll(".page"));
    
    const render = () => {
