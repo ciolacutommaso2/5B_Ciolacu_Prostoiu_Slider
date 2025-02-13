@@ -1,7 +1,7 @@
 const formDiv = document.getElementById("formdiv");
 
 
-import {createFormComp} from './componenti/form';
+import {createFormComp} from './componenti/form.js';
 import {createNavigator} from "./componenti/navigator.js";
 
 
