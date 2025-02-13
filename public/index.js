@@ -6,8 +6,10 @@ import {createNavigator} from "./componenti/navigator.js";
 
 
 fetch("./conf.json").then(r => r.json()).then(conf => {
-    const navigator = createNavigator(document.querySelector("#container"),detailComp);
+    const navigator = createNavigator(document.querySelector("#pages"));
     const formComp = createFormComp(formDiv)
+    const middleware = createMiddleware();
+
 })
 
 const controller = async (middleware) => {

@@ -1,5 +1,5 @@
-export const createFormComp = (parentElement, pubsub) => {
-    const parentElement = parentElement;
+export const createFormComp = (parentElementIn, pubsub) => {
+    const parentElement = parentElementIn;
     return {
         render: () => {
             let html = 
