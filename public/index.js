@@ -1,3 +1,15 @@
+const formDiv = document.getElementById("formdiv");
+
+
+import {createFormComp} from './componenti/form';
+import {createNavigator} from "./componenti/navigator.js";
+
+
+fetch("./conf.json").then(r => r.json()).then(conf => {
+    const navigator = createNavigator(document.querySelector("#container"),detailComp);
+    const formComp = createFormComp(formDiv)
+})
+
 const controller = async (middleware) => {
     const inputFile = document.querySelector('#file');
     const button = document.querySelector('#button');

@@ -40,7 +40,7 @@ app.delete('/delete/:id', async (req, res) => {
     res.json({result: "ok"});
 })
 const server = http.createServer(app);
-server.listen(5600, () => {
+server.listen(5500, () => {
   console.log("- server running");
 });
 
