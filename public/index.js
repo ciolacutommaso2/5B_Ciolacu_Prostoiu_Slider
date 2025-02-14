@@ -5,7 +5,7 @@ import {createFormComp} from './componenti/form.js';
 import {createNavigator} from "./componenti/navigator.js";
 
 
-fetch("../conf.json").then(r => r.json()).then(conf => {
+fetch("./conf.json").then(r => r.json()).then(conf => {
     const navigator = createNavigator(document.querySelector("#container"));
     const formComp = createFormComp(formDiv)
     const middleware = createMiddleware();
