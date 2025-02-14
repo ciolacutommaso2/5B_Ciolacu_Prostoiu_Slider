@@ -19,10 +19,10 @@ const upload = multer({storage: storage}).single('file');
 
 app.use("/", express.static(path.join(__dirname, "public")));
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/files", express.static(path.join(__dirname, "files")));
 
 app.post("/upload", multer({storage: storage}).single('file'), async (req, res) => {
-    await database.insert("./images/" + req.file.originalname);
+    await database.insert("./files/" + req.file.originalname);
     res.json({result: "ok"});
     console.log("AGGIUNTO -> ", req.file.originalname)
 });
