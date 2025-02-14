@@ -11,7 +11,7 @@ import {createTableComponent} from "./componenti/table.js"
 const createMiddleware = () => {
     return {
         load: async () => {
-            const response = await fetch("/files");
+            const response = await fetch("/get");
             const json = await response.json();
             return json;
         },
