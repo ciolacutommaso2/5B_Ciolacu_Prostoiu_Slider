@@ -2,11 +2,15 @@ const formDiv = document.getElementById("formdiv");
 const inputFile = document.querySelector('#file');
 const button = document.querySelector('#buttonUpload');
 const listimgDiv = document.querySelector('#listimgDiv');
+const formLogin = document.getElementById("formlogin");
+const bottone_admin = document.getElementById("buttonadmin");
 
 import {createFormComp} from './componenti/form.js';
 import {createNavigator} from "./componenti/navigator.js";
 import {generatePubSub} from "./componenti/pubsub.js";
 import {createTableComponent} from "./componenti/table.js"
+import {createLogin} from "./componenti/login.js"
+import {createFormLogin} from './componenti/form_login.js';
 
 const createMiddleware = () => {
     return {
@@ -43,6 +47,8 @@ const createMiddleware = () => {
 
 
 fetch("./conf.json").then(r => r.json()).then(conf => {
+    const form_login=createFormLogin(formLogin);
+    const login = createLogin();
     const pubsub = generatePubSub();
     const navigator = createNavigator(document.querySelector("#container"));
     const formComp = createFormComp(formDiv)
@@ -53,6 +59,7 @@ fetch("./conf.json").then(r => r.json()).then(conf => {
     pubsub.subscribe("carica-dati-list", (dati) => {
         tableComp.setData(dati);
         tableComp.render();
+        form_login.render(login,bottone_admin)
         console.log("Dati caricati sulla lista");
     });
     pubsub.subscribe("renderList", () => {
@@ -81,6 +88,12 @@ const controller = async (middleware) => {
     button.onclick = handleSubmit;
 }
 
-
+window.addEventListener("load", function () {
+    let risposta = sessionStorage.getItem("login");
+    console.log(risposta)
+    if (risposta==="true"){
+        bottone_admin.classList.remove("d-none")
+    }
+});
 
 

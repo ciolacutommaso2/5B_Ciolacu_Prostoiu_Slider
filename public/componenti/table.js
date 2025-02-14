@@ -4,7 +4,7 @@ export const createTableComponent = (parentElementIn, pubsub) => {
     const parentElement = parentElementIn;
 
     let templateRow = `
-        <li class="list-group-item"><a href="%URL">%URL</a></li>
+        <li class="list-group-item"><img src=".%URL"></img></li>
     `;
 
 
@@ -27,8 +27,9 @@ export const createTableComponent = (parentElementIn, pubsub) => {
         render: () => {
             let html = "";
             data.forEach((dato) => {
+                console.log(dato.name)
                 let riga = templateRow.replace("%URL", dato.name);
-                riga = templateRow.replace("%URL", dato.name);
+                html += riga
             })
 
             parentElement.innerHTML = html;
