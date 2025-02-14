@@ -5,3 +5,16 @@
 .hidden {
     display: none;
 }
+
+#Password {
+    margin-bottom: 20px;
+}
+
+table img, ul img, ol img {
+    width: 150px;   /* Larghezza fissa */
+    height: 150px;  /* Altezza fissa */
+    object-fit: cover; /* Ritaglia l'immagine per riempire */
+    display: block;  /* Evita spazi indesiderati */
+  }
+  
+  

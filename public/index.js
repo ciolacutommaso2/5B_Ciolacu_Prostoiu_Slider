@@ -4,6 +4,7 @@ const button = document.querySelector('#buttonUpload');
 const listimgDiv = document.querySelector('#listimgDiv');
 const formLogin = document.getElementById("formlogin");
 const bottone_admin = document.getElementById("buttonadmin");
+bottone_admin.classList.add("d-none");
 
 import {createFormComp} from './componenti/form.js';
 import {createNavigator} from "./componenti/navigator.js";
