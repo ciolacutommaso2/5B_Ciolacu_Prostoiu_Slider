@@ -1,21 +1,23 @@
 const formDiv = document.getElementById("formdiv");
-
+const inputFile = document.querySelector('#file');
+const button = document.querySelector('#button');
+const listimgDiv = document.querySelector('#listimgDiv');
 
 import {createFormComp} from './componenti/form.js';
 import {createNavigator} from "./componenti/navigator.js";
 
 
 fetch("./conf.json").then(r => r.json()).then(conf => {
-    const navigator = createNavigator(document.querySelector("#pages"));
+    const navigator = createNavigator(document.querySelector("#container"));
     const formComp = createFormComp(formDiv)
     const middleware = createMiddleware();
+    
 
 })
 
 const controller = async (middleware) => {
-    const inputFile = document.querySelector('#file');
-    const button = document.querySelector('#button');
-    const listUL = document.querySelector('#listUL');
+
+
     
 
     handleSubmit = async (event) => {

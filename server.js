@@ -3,7 +3,7 @@ const http = require('http');
 const path = require('path');
 const app = express();
 const multer  = require('multer');
-const database = require('database.js');
+const database = require('./database.js');
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {

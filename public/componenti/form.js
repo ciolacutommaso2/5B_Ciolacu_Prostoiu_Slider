@@ -13,6 +13,7 @@ export const createFormComp = (parentElementIn, pubsub) => {
             </form>
                             ` ;
             parentElement.innerHTML = html;
+              
         }
     }
 }

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mysql = require('mysql2');
 const { isNativeError } = require('util/types');
-let conf = JSON.parse(fs.readFileSync('conf.json'));
+let conf = JSON.parse(fs.readFileSync('public/conf.json'));
 conf.ssl = {
     ca: fs.readFileSync(__dirname + '/ca.pem')
 }

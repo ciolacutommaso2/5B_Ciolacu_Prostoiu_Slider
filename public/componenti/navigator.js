@@ -11,7 +11,7 @@ const show = (element) => {
 }
 
 export const createNavigator = (parentElement) => {
-   
+
    const pages = Array.from(parentElement.querySelectorAll(".page"));
    
    const render = () => {
