@@ -48,20 +48,29 @@ fetch("./conf.json").then(r => r.json()).then(conf => {
     const formComp = createFormComp(formDiv)
     const middleware = createMiddleware();
     const tableComp = createTableComponent(listimgDiv, pubsub);
-    middleware.load().then(r => tableComp.setData(r));
+    middleware.load().then((r) => {tableComp.setData(r); tableComp.render()});
 
+    pubsub.subscribe("carica-dati-list", (dati) => {
+        tableComp.setData(dati);
+        tableComp.render();
+        console.log("Dati caricati sulla lista");
+    });
+    pubsub.subscribe("renderList", () => {
+        tableComp.render();
+        console.log("Lista renderizzata");
+    })
 
     
     const handleSubmit = async (event) => {
         await middleware.upload(inputFile);
         const list = await middleware.load();
-        render(list);
+        pubsub.publish("renderList");
     }
 
 
     button.onclick = handleSubmit;
     middleware.load().then(
-        r => pubsub.publish("carica-dati", r)        
+        r => pubsub.publish("carica-dati-list", r)        
     );
     
 

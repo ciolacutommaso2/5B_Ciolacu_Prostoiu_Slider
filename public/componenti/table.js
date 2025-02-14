@@ -7,15 +7,7 @@ export const createTableComponent = (parentElementIn, pubsub) => {
         <li class="list-group-item"><a href="%URL">%URL</a></li>
     `;
 
-    pubsub.subscribe("carica-dati", (dati) => {
-        this.setData(dati);
-        this.render();
-        console.log("Dati caricati sulla lista");
-    });
-    pubsub.subscribe("renderList", () => {
-        this.render();
-        console.log("Lista renderizzata");
-    })
+
     
     return {
         togliDati: (inizio, fine) => {data.splice(inizio, fine)}, 
