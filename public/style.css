@@ -11,10 +11,10 @@
 }
 
 table img, ul img, ol img {
-    width: 150px;   /* Larghezza fissa */
-    height: 150px;  /* Altezza fissa */
-    object-fit: cover; /* Ritaglia l'immagine per riempire */
-    display: block;  /* Evita spazi indesiderati */
+    width: 150px; 
+    height: 150px;
+    object-fit: cover;
+    display: block;
   }
   
   
