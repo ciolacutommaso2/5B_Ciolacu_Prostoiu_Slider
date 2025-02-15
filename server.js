@@ -38,7 +38,7 @@ app.get('/get', async (req, res) => {
 app.delete('/delete/:id', async (req, res) => {
     await database.delete(req.params.id);
     res.json({result: "ok"});
-    console.log("URL IMMAGINI -> ", images);
+    
 })
 const server = http.createServer(app);
 server.listen(5500, () => {
