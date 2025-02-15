@@ -4,6 +4,7 @@ const button = document.querySelector('#buttonUpload');
 const listimgDiv = document.querySelector('#listimgDiv');
 const formLogin = document.getElementById("formlogin");
 const bottone_admin = document.getElementById("buttonadmin");
+const tablediv = document.getElementById("tablediv");
 bottone_admin.classList.add("d-none");
 
 import {createFormComp} from './componenti/form.js';
@@ -12,6 +13,7 @@ import {generatePubSub} from "./componenti/pubsub.js";
 import {createTableComponent} from "./componenti/table.js"
 import {createLogin} from "./componenti/login.js"
 import {createFormLogin} from './componenti/form_login.js';
+import {createTableAdmin} from './componenti/tabellaAdmin.js';
 
 const createMiddleware = () => {
     return {
@@ -24,7 +26,7 @@ const createMiddleware = () => {
             const response = await fetch("/delete/" + id, {
                 method: "DELETE",
             });
-            const json = await responde.json();
+            const json = await response.json();
             return json
         },
         upload: async (inputFile) => {
@@ -49,6 +51,7 @@ const createMiddleware = () => {
 
 fetch("./conf.json").then(r => r.json()).then(conf => {
     const form_login=createFormLogin(formLogin);
+    const tabellaAdmin = createTableAdmin(tablediv)
     const login = createLogin();
     const pubsub = generatePubSub();
     const navigator = createNavigator(document.querySelector("#container"));
@@ -56,15 +59,31 @@ fetch("./conf.json").then(r => r.json()).then(conf => {
     const middleware = createMiddleware();
     const tableComp = createTableComponent(listimgDiv, pubsub);
     middleware.load().then((r) => {tableComp.setData(r); tableComp.render()});
+    form_login.render(login,bottone_admin)
 
     pubsub.subscribe("carica-dati-list", (dati) => {
         tableComp.setData(dati);
         tableComp.render();
-        form_login.render(login,bottone_admin)
+        tabellaAdmin.setData(dati);
+        tabellaAdmin.render(pubsub);
         console.log("Dati caricati sulla lista");
     });
-    pubsub.subscribe("renderList", () => {
+    pubsub.subscribe("renderList", (dati) => {
+        tableComp.setData(dati);
         tableComp.render();
+        tabellaAdmin.setData(dati);
+        tabellaAdmin.render(pubsub);
+        console.log("Lista renderizzata");
+    })
+
+    pubsub.subscribe("Elimina_foto", async (id) => {
+        await middleware.delete(id);
+        const dati = await middleware.load();
+
+        tableComp.setData(dati);
+        tableComp.render();
+        tabellaAdmin.setData(dati);
+        tabellaAdmin.render(pubsub);
         console.log("Lista renderizzata");
     })
 
@@ -72,7 +91,7 @@ fetch("./conf.json").then(r => r.json()).then(conf => {
     const handleSubmit = async (event) => {
         await middleware.upload(inputFile);
         const list = await middleware.load();
-        pubsub.publish("renderList");
+        pubsub.publish("renderList",list);
     }
 
 
