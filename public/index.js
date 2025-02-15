@@ -1,7 +1,7 @@
 const formDiv = document.getElementById("formdiv");
 const inputFile = document.querySelector('#file');
 const button = document.querySelector('#buttonUpload');
-const listimgDiv = document.querySelector('#listimgDiv');
+const carousel = document.querySelector('#carouselInner');
 const formLogin = document.getElementById("formlogin");
 const bottone_admin = document.getElementById("buttonadmin");
 const tablediv = document.getElementById("tablediv");
@@ -52,12 +52,12 @@ const createMiddleware = () => {
 fetch("./conf.json").then(r => r.json()).then(conf => {
     const form_login=createFormLogin(formLogin);
     const tabellaAdmin = createTableAdmin(tablediv)
-    const login = createLogin();
+    const login = createLogin(conf);
     const pubsub = generatePubSub();
     const navigator = createNavigator(document.querySelector("#container"));
     const formComp = createFormComp(formDiv)
     const middleware = createMiddleware();
-    const tableComp = createTableComponent(listimgDiv, pubsub);
+    const tableComp = createTableComponent(carousel, pubsub);
     middleware.load().then((r) => {tableComp.setData(r); tableComp.render()});
     form_login.render(login,bottone_admin)
 
@@ -79,7 +79,6 @@ fetch("./conf.json").then(r => r.json()).then(conf => {
     pubsub.subscribe("Elimina_foto", async (id) => {
         await middleware.delete(id);
         const dati = await middleware.load();
-
         tableComp.setData(dati);
         tableComp.render();
         tabellaAdmin.setData(dati);

@@ -1,13 +1,14 @@
-export const createLogin=()=>{
+export const createLogin=(fileconf)=>{
+    let conf = fileconf;
     sessionStorage.setItem("login", "false");
     return{
         login:(nome,password)=>{
             return new Promise((resolve, reject) => {
-                fetch("http://ws.cipiaceinfo.it/credential/login", { 
+                fetch("https://ws.cipiaceinfo.it/credential/login", { 
                   method: "POST",
                   headers: {
                      "content-type": "application/json",
-                     "key": "3819207b-2545-44f5-9bce-560b484b2f0f"
+                     "key": conf["cacheToken"]
                   },
                   body: JSON.stringify({
                      username: nome,

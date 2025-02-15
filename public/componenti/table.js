@@ -4,9 +4,10 @@ export const createTableComponent = (parentElementIn, pubsub) => {
     const parentElement = parentElementIn;
 
     let templateRow = `
-        <li class="list-group-item"><img src=".%URL"></img></li>
+        <div class="carousel-item #TEST">
+            <img src=".%URL"></img>
+        </div>
     `;
-
 
     
     return {
@@ -26,10 +27,12 @@ export const createTableComponent = (parentElementIn, pubsub) => {
         
         render: () => {
             let html = "";
+            let i = 0;
             data.forEach((dato) => {
-                console.log(dato.name)
                 let riga = templateRow.replace("%URL", dato.name);
+                riga = riga.replace("#TEST", i ==0 ? "active" : "");
                 html += riga
+                i++;
             })
 
             parentElement.innerHTML = html;
